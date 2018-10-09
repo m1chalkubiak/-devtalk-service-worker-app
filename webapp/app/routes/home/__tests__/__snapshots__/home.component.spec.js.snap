@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home: Component should render Home root 1`] = `
+<styled.div>
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
+    title="Homepage"
+  />
+  <styled.h1>
+    <styled.i
+      name="logo"
+    />
+    <FormattedMessage
+      defaultMessage="Hello World!"
+      id="home.welcome"
+      values={Object {}}
+    />
+  </styled.h1>
+</styled.div>
+`;
