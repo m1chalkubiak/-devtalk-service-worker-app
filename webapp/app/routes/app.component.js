@@ -2,9 +2,13 @@ import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { IntlProvider } from 'react-intl';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from 'styled-components';
 
 import { translationMessages } from '../i18n';
-import { DEFAULT_LOCALE } from '../modules/locales/locales.redux';
+import { theme } from '../theme';
+import { DEFAULT_LOCALE } from '../modules/locales/';
 import { Loader } from '../components/';
 
 
@@ -23,6 +27,7 @@ export class App extends PureComponent {
   render() {
     return (
       <Fragment>
+        <CssBaseline />
         <Helmet
           titleTemplate="%s - Service Worker App"
           defaultTitle="Devtalk"
@@ -36,10 +41,14 @@ export class App extends PureComponent {
           messages={translationMessages[DEFAULT_LOCALE]}
           location={this.props.location}
         >
-          <Fragment>
-            <Loader />
-            {React.Children.only(this.props.children)}
-          </Fragment>
+          <MuiThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}>
+              <Fragment>
+                <Loader />
+                {React.Children.only(this.props.children)}
+              </Fragment>
+            </ThemeProvider>
+          </MuiThemeProvider>
         </IntlProvider>
       </Fragment>
     );

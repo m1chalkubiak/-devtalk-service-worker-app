@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 
+import { AvatarImage } from '../../theme';
 import messages from './dashboard.messages';
 import { Container, Header } from './dashboard.styles';
 
@@ -17,7 +18,7 @@ export class Dashboard extends PureComponent {
     <Container>
       <Helmet title="Dashboard" />
       <Header>
-        <img
+        <AvatarImage
           src={this.props.currentUser.get('avatarURL', '')}
           alt={this.props.currentUser.get('name', '')}
         />

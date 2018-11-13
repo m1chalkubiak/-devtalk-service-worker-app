@@ -7,7 +7,7 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 import { TextField } from '../../theme';
 import { NAME_FIELD } from '../../modules/users/';
-import { Wrapper, LoginForm, LoginButton, LoginIcon } from './login.styles';
+import { Wrapper, LoginForm, LoginButton } from './login.styles';
 import messages from './login.messages';
 
 
@@ -48,7 +48,6 @@ export class Login extends PureComponent {
         />
         <LoginButton variant="raised" color="primary" type="submit">
           <FormattedMessage {...messages.start} />
-          <LoginIcon />
         </LoginButton>
       </LoginForm>
     </Wrapper>

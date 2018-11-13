@@ -7,6 +7,6 @@ export default defineMessages({
   },
   start: {
     id: 'login.start',
-    defaultMessage: 'Let\'s start',
+    defaultMessage: 'Get Started',
   },
 });

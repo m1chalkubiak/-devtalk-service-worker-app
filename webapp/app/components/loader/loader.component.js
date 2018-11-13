@@ -1,5 +1,6 @@
-import React, { Fragment, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { ifElse, equals, always } from 'ramda';
 
 import { Container, LoaderProgress } from './loader.styles';
 
@@ -9,20 +10,13 @@ export class Loader extends PureComponent {
     loaded: PropTypes.bool.isRequired,
   };
 
-  renderLoader = () => {
-    if (!this.props.loaded) {
-      return (
-        <Container>
-          <LoaderProgress mode="indeterminate" />
-        </Container>
-      );
-    }
-    return null;
-  };
-
-  render = () => (
-    <Fragment>
-      {this.renderLoader()}
-    </Fragment>
-  );
+  render = () => ifElse(
+    equals(false),
+    () => (
+      <Container>
+        <LoaderProgress mode="indeterminate" />
+      </Container>
+    ),
+    always(null)
+  )(this.props.loaded);
 }

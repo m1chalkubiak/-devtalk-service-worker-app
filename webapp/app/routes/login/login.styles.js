@@ -1,33 +1,26 @@
 import styled from 'styled-components';
-import SendIcon from '@material-ui/icons/Send';
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
+import { getUnit } from '../../utils/rendering';
 
-export const Wrapper = styled.section`
-  width: 100%;
-  height: 100vh;
-  z-index: 1;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
-export const LoginForm = styled.form`
-  width: 50%;
-  min-width: 320px;
-  min-height: 30vh;
+export const Wrapper = styled(Paper)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: ${getUnit(2)}px ${getUnit(3)}px ${getUnit(3)}px;
+  max-width: ${getUnit(50)}px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
-export const LoginIcon = styled(SendIcon)`
-
+export const LoginForm = styled.form`
+  width: 100%; // Fix IE 11 issue.
+  display: flex;
+  flex-direction: column;
 `;
 
 export const LoginButton = styled(Button)`
-
+  margin-top: ${getUnit(3)}px;
 `;
-
