@@ -3,9 +3,6 @@ import { createActions, createReducer } from '../utils/entityRegistry';
 import { UserAuthTypes } from '../userAuth/userAuth.redux';
 
 
-export const OFFLINE_STATUS = 'offline';
-export const ONLINE_STATUS = 'online';
-
 export const {
   Types: UsersTypes,
   Creators: UsersActions,
@@ -13,7 +10,6 @@ export const {
   setupUserData: ['user'],
   createUser: ['user'],
   listenForUsers: null,
-  changeUserStatus: ['uid', 'status'],
   checkIfUserAccountExists: ['user'],
 }, { prefix: 'USERS_' });
 

@@ -23,16 +23,10 @@ export const LoginForm = styled.form`
   justify-content: center;
 `;
 
-// && {
-//   margin-left: ${theme.spacing.unit}px;
-// }
 export const LoginIcon = styled(SendIcon)`
 
 `;
 
-// && {
-//   margin: ${theme.spacing.unit}px;
-// }
 export const LoginButton = styled(Button)`
 
 `;

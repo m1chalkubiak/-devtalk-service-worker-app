@@ -5,11 +5,10 @@ import reportError from 'report-error';
 import firebase from 'firebase';
 
 import { StartupTypes } from '../startup';
-import { OFFLINE_STATUS, ONLINE_STATUS, UsersActions } from '../users/users.redux';
+import { UsersActions } from '../users/users.redux';
 import { selectLocationState } from '../router/router.selectors';
 import { UserAuthTypes, UserAuthActions } from './userAuth.redux';
 import { LoaderActions } from '../loader/';
-import { selectLoggedUser } from '../users/users.selectors';
 import { selectIsConfigured } from './userAuth.selectors';
 
 function* signInAnonymously() {
@@ -22,9 +21,6 @@ function* signInAnonymously() {
 
 function* signOutFromFirebase() {
   try {
-    const loggedUser = yield select(selectLoggedUser);
-
-    yield put(UsersActions.changeUserStatus(loggedUser.get('uid'), OFFLINE_STATUS));
     yield put(UserAuthActions.clearUserData());
     yield firebase.auth().signOut();
     yield put(UserAuthActions.signInAnonymously());
