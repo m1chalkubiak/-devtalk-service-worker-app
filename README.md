@@ -4,5 +4,5 @@ Simple application using the functionality of service workers
 
 ## Features to implement
 
-- [ ] Users `Authentication` via device
-- [ ] Connecting to `Realtime Database`
+- [x] Users `Authentication` via device
+- [x] Connecting to `Realtime Database`
