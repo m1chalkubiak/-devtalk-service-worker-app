@@ -1,15 +1,15 @@
 import { Record } from 'immutable';
 import { createReducer, createActions } from 'reduxsauce';
 
+import { DEFAULT_LOCALE } from './locales.constants';
 
-export const DEFAULT_LOCALE = 'en';
 
 export const { Types: LocalesTypes, Creators: LocalesActions } = createActions({
   setLanguage: ['language'],
 }, { prefix: 'LOCALES_' });
 
 const LocalesRecord = new Record({
-  language: null,
+  language: DEFAULT_LOCALE,
 });
 
 export const INITIAL_STATE = new LocalesRecord({});

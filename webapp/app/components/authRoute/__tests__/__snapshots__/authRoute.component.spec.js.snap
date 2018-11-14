@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthRoute /> should render a <Redirect /> to defaultRedirect page 1`] = `
+<Redirect
+  push={false}
+  to="/default-page"
+/>
+`;
+
+exports[`<AuthRoute /> should render a <Redirect /> to home page when user is authenticated but route requires anonymous 1`] = `
+<Redirect
+  push={false}
+  to="/"
+/>
+`;
+
+exports[`<AuthRoute /> should render a <Redirect /> to login page if user is archived 1`] = `
+<Route
+  anonymous={false}
+  defaultRedirect="/login"
+  hasInstalledApp={false}
+  isAuthenticated={true}
+  location={Object {}}
+  to="/some-route"
+  userProfile={
+    Immutable.Map {
+      "name": "John Doe",
+      "archived": true,
+    }
+  }
+/>
+`;
+
+exports[`<AuthRoute /> should render a <Redirect /> to login page if user is not authenticated 1`] = `
+<Redirect
+  push={false}
+  to="/login"
+/>
+`;
+
+exports[`<AuthRoute /> should render a real <Route /> when user is authenticated and is not archived 1`] = `
+<Route
+  anonymous={false}
+  defaultRedirect="/login"
+  hasInstalledApp={false}
+  isAuthenticated={true}
+  location={Object {}}
+  to="/some-route"
+  userProfile={
+    Immutable.Map {
+      "name": "John Doe",
+    }
+  }
+/>
+`;
+
+exports[`<AuthRoute /> should render a real <Route /> when user is not authenticated and route required anonymous user 1`] = `
+<Route
+  anonymous={true}
+  defaultRedirect="/login"
+  hasInstalledApp={false}
+  isAuthenticated={false}
+  location={Object {}}
+  to="/some-route"
+  userProfile={Immutable.Map {}}
+/>
+`;
+
+exports[`<AuthRoute /> should render default component tree 1`] = `
+<Redirect
+  push={false}
+  to="/login"
+/>
+`;
+
+exports[`<AuthRoute /> should render null when user is authenticated by user roles were not fetched yet 1`] = `
+<Route
+  anonymous={false}
+  defaultRedirect="/login"
+  hasInstalledApp={false}
+  isAuthenticated={true}
+  location={Object {}}
+  to="/some-route"
+  userProfile={Immutable.Map {}}
+/>
+`;
