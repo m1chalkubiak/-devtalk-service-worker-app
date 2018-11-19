@@ -7,9 +7,10 @@ import firebase from 'firebase';
 import { StartupTypes } from '../startup';
 import { UsersActions } from '../users/users.redux';
 import { selectLocationState } from '../router/router.selectors';
+import { SyncActions } from '../sync/sync.redux';
 import { UserAuthTypes, UserAuthActions } from './userAuth.redux';
-import { LoaderActions } from '../loader/';
 import { selectIsConfigured } from './userAuth.selectors';
+import { LoaderActions } from '../loader/';
 
 function* signInAnonymously() {
   try {
@@ -55,11 +56,16 @@ function* listenForFirebaseAuth() {
       } else {
         yield put(UserAuthActions.setUserData({ uid: user.uid }));
         yield put(UsersActions.listenForUsers());
+        yield put(UserAuthActions.setOnlineStatus(true));
 
         const data = yield firebase.database().ref(`/users/${user.uid}`).once('value');
         yield put(LoaderActions.setDataLoaded());
         if (data.val() && data.val().name) {
           yield put(UserAuthActions.setUserData({ isConfigured: true }));
+        }
+
+        if (data.val() && data.val().waterConsumption) {
+          yield put(UserAuthActions.initializeWaterConsumption(data.val().waterConsumption));
         }
 
         const isConfigured = yield select(selectIsConfigured);
@@ -79,12 +85,22 @@ function* listenForFirebaseAuth() {
   }
 }
 
+function* drinkWater({ value }) {
+  try {
+    yield put(SyncActions.syncWaterConsumption(value));
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
 export default function* watchUserAuth() {
   try {
     yield all([
       takeLatest(UserAuthTypes.SIGN_IN_ANONYMOUSLY, signInAnonymously),
       takeLatest(UserAuthTypes.SIGN_OUT, signOutFromFirebase),
       takeLatest(UserAuthTypes.SETUP_USER, signOutFromFirebase),
+      takeLatest(UserAuthTypes.DRINK_WATER, drinkWater),
       takeLatest(StartupTypes.STARTUP, listenForFirebaseAuth),
     ]);
   } catch (error) {

@@ -12,21 +12,46 @@ export class Dashboard extends PureComponent {
   static propTypes = {
     users: PropTypes.object.isRequired,
     currentUser: PropTypes.object.isRequired,
+    isOnline: PropTypes.bool.isRequired,
+    isSyncing: PropTypes.bool.isRequired,
+    waterConsumption: PropTypes.number.isRequired,
+    drinkWater: PropTypes.func.isRequired,
   };
 
-  render = () => (
-    <Container>
-      <Helmet title="Dashboard" />
-      <Header>
-        <AvatarImage
-          src={this.props.currentUser.get('avatarURL', '')}
-          alt={this.props.currentUser.get('name', '')}
-        />
-        <FormattedMessage
-          {...messages.headline}
-          values={{ name: this.props.currentUser.get('name', '') }}
-        />
-      </Header>
-    </Container>
-  );
+  render() {
+    return (
+      <Container>
+        <Helmet title="Dashboard" />
+        <Header>
+          <AvatarImage
+            src={this.props.currentUser.get('avatarURL', '')}
+            alt={this.props.currentUser.get('name', '')}
+          />
+          <FormattedMessage
+            {...messages.headline}
+            values={{ name: this.props.currentUser.get('name', '') }}
+          />
+
+          <FormattedMessage
+            {...messages.onlineStatus}
+            values={{ value: this.props.isOnline ? 'True' : 'False' }}
+          />
+
+          <FormattedMessage
+            {...messages.syncStatus}
+            values={{ value: this.props.isSyncing ? 'True' : 'False' }}
+          />
+
+          <FormattedMessage
+            {...messages.consumption}
+            values={{ value: this.props.waterConsumption }}
+          />
+
+          <button onClick={() => this.props.drinkWater(1)}>
+            Drink 1l of watter
+          </button>
+        </Header>
+      </Container>
+    );
+  }
 }

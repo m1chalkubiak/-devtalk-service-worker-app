@@ -7,6 +7,7 @@ const path = require('path');
 const webpack = require('webpack');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const WebpackAppversionPlugin = require('webpack-appversion-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const SpritesmithPlugin = require('webpack-spritesmith');
 const fs = require('fs');
 /* eslint-enable import/no-extraneous-dependencies */
@@ -137,6 +138,9 @@ module.exports = (options) => {
         },
       }),
       new webpack.NamedModulesPlugin(),
+      new CopyWebpackPlugin([
+        { from: path.resolve(process.cwd(), 'app/sw.index.js'), to: path.resolve(process.cwd(), 'dist') },
+      ]),
     ]),
     resolve: {
       alias: alias,
