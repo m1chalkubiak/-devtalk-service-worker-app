@@ -7,15 +7,19 @@ import { compose } from 'ramda';
 
 import { Dashboard } from './dashboard.component';
 import { selectUsers, selectLoggedUser } from '../../modules/users';
+import { selectOnlineStatus, selectSyncStatus, selectWaterConsumption, UserAuthActions } from '../../modules/userAuth';
 
 
 const mapStateToProps = createStructuredSelector({
   users: selectUsers,
   currentUser: selectLoggedUser,
+  isOnline: selectOnlineStatus,
+  isSyncing: selectSyncStatus,
+  waterConsumption: selectWaterConsumption,
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({
-
+  drinkWater: UserAuthActions.drinkWater,
 }, dispatch);
 
 export default compose(

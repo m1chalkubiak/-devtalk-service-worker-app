@@ -68,6 +68,7 @@
     "babel-polyfill": "6.26.0",
     "chalk": "^2.4.1",
     "compression": "1.7.2",
+    "copy-webpack-plugin": "^4.6.0",
     "cross-env": "5.1.6",
     "es5-shim": "^4.5.9",
     "express": "4.16.3",
