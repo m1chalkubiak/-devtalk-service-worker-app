@@ -6,19 +6,28 @@ import App from './app.container';
 import { NotFound } from './notFound';
 import Login from './login';
 import Dashboard from './dashboard';
+import Scoreboard from './scoreboard';
+import { Navigation } from "../components";
 
 export class RootContainer extends Component {
   render() {
     return (
       <Switch>
         <App>
+
           <Switch>
-            <AuthRoute exact path="/" component={Dashboard} />
-            <AuthRoute exact path="/dashboard" component={Dashboard} />
-            <AuthRoute exact path="/login" component={Login} anonymous />
-            <Route component={NotFound} />
+            <Route exact path="/login" component={Login} anonymous />
+
+            <Navigation>
+              <Switch>
+                <AuthRoute exact path="/" component={Dashboard} />
+                <AuthRoute exact path="/dashboard" component={Dashboard} />
+                <AuthRoute exact path="/scoreboard" component={Scoreboard} />
+              </Switch>
+            </Navigation>
           </Switch>
         </App>
+        <Route component={NotFound} />
       </Switch>
     );
   }
