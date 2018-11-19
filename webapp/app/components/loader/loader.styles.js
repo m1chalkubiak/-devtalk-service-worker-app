@@ -10,7 +10,7 @@ export const LoaderProgress = styled(CircularProgress)`
 `;
 
 export const Container = styled.div`
-   background-color: ${getColor(['primary', 'main'])};
+  background-color: ${getColor(['primary', 'main'])};
   position: absolute;
   z-index: 20;
   display: flex;

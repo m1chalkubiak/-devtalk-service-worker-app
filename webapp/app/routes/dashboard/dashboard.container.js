@@ -11,7 +11,6 @@ import { selectOnlineStatus, selectSyncStatus, selectWaterConsumption, UserAuthA
 
 
 const mapStateToProps = createStructuredSelector({
-  users: selectUsers,
   currentUser: selectLoggedUser,
   isOnline: selectOnlineStatus,
   isSyncing: selectSyncStatus,
