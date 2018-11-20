@@ -7,7 +7,7 @@ export const theme = createMuiTheme({
       main: '#55bd86',
     },
     secondary: {
-      main: '#ffca28',
+      main: '#03ccff',
     },
   },
   overrides: {
