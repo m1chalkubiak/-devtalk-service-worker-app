@@ -4,7 +4,6 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'ramda';
 import { hot } from 'react-hot-loader';
 
-import { selectIsDataLoaded } from '../../modules/loader';
 import { Navigation } from './navigation.component';
 
 

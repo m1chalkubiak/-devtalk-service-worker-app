@@ -1,7 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Map } from 'immutable';
-import {always, equals, ifElse} from 'ramda';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -34,23 +33,30 @@ export class Scoreboard extends PureComponent {
   sortByStatus = (users) => users.sortBy(user => user.getIn(['value', this.state.sortBy], 0)).reverse();
 
     render = () => (
-    <Fragment>
-      <List dense subheader={<ListSubheader>Users</ListSubheader>}>
-        {this.sortByStatus(this.props.users).map((user, userId) => {
-          return (
-            <ListItem key={userId}>
-              <Avatar onClick={this.handleWaterConsumptionClick} alt={user.getIn(['value', 'name'])} src={user.getIn(['value', 'avatarURL'])} />
-              <ListItemText onClick={this.handleNameClick} primary={user.getIn(['value', 'name'])} />
-              <Score>
-                <ListItemText primary={user.getIn(['value', 'waterConsumption'], '0')} />
-                <ListItemIcon>
-                  <DrinkIcon />
-                </ListItemIcon>
-              </Score>
-            </ListItem>
-          );
-        }).toArray()}
-      </List>
-    </Fragment>
-  );
+      <Fragment>
+        <List dense subheader={<ListSubheader>Users</ListSubheader>}>
+          {this.sortByStatus(this.props.users).map((user, userId) => {
+            return (
+              <ListItem key={userId}>
+                <Avatar
+                  onClick={this.handleWaterConsumptionClick}
+                  alt={user.getIn(['value', 'name'], '')}
+                  src={user.getIn(['value', 'avatarURL'], '')}
+                />
+                <ListItemText
+                  onClick={this.handleNameClick}
+                  primary={user.getIn(['value', 'name'], '')}
+                />
+                <Score>
+                  <ListItemText primary={user.getIn(['value', 'waterConsumption'], 0)} />
+                  <ListItemIcon>
+                    <DrinkIcon />
+                  </ListItemIcon>
+                </Score>
+              </ListItem>
+            );
+          }).toArray()}
+        </List>
+      </Fragment>
+    );
 }
