@@ -13,6 +13,7 @@ export const Bar = styled(AppBar)`
   && {
     box-shadow: none;
     background-color: ${getColor(['common', 'white'])}
+    padding-top: ${getUnit(0.5)}px;
   }
 `;
 

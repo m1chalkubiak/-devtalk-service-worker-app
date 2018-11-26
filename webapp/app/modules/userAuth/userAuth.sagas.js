@@ -75,7 +75,7 @@ function* listenForFirebaseAuth() {
           yield put(replace('/login'));
         }
         if (pathname === '/login' && isConfigured) {
-          yield put(replace('/dashboard'));
+          yield put(replace('/'));
         }
       }
     }
