@@ -4,41 +4,77 @@ import { Map } from 'immutable';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { FormattedMessage } from 'react-intl';
 
 import { NAME_SORT_TYPE, WATER_CONSUMPTION_SORT_TYPE } from '../../modules/users';
-import { Score, DrinkIcon } from './scoreboard.styles';
+import { Bar, Toolbar, Header, MoreIcon, Score, DrinkIcon } from './scoreboard.styles';
+import messages from './scoreboard.messages';
 
 
 export class Scoreboard extends PureComponent {
   static propTypes = {
     sortedUsers: PropTypes.instanceOf(Map).isRequired,
     changeSortType: PropTypes.func.isRequired,
-    sortType: PropTypes.string.isRequired,
   };
 
-  handleWaterConsumptionClick = () => this.props.changeSortType(WATER_CONSUMPTION_SORT_TYPE);
+  state = {
+    anchorEl: null,
+  };
 
-  handleNameClick = () => this.props.changeSortType(NAME_SORT_TYPE);
+  get open() {
+    return !!this.state.anchorEl;
+  }
 
-  changeSortType = (sortType = NAME_SORT_TYPE) => this.props.changeSortType(sortType);
+  handleCloseMenu = () => this.setState({ anchorEl: null });
+
+  handleOpenMenu = ({ currentTarget: anchorEl }) => this.setState({ anchorEl });
+
+  changeSortType = (sortType = NAME_SORT_TYPE) => {
+    this.props.changeSortType(sortType);
+    this.handleCloseMenu();
+  };
 
   render = () => (
     <Fragment>
-
-      <List key={this.props.sortType} dense subheader={<ListSubheader>Users</ListSubheader>}>
+      <Bar position="static">
+        <Toolbar disableGutters>
+          <Header color="inherit" variant="subheading" align="left">
+            <FormattedMessage {...messages.usersListHeadline} />
+          </Header>
+          <IconButton
+            color="inherit"
+            onClick={this.handleOpenMenu}
+          >
+            <MoreIcon aria-haspopup="true" />
+          </IconButton>
+        </Toolbar>
+        <Menu
+          anchorEl={this.state.anchorEl}
+          open={this.open}
+          onClose={this.handleCloseMenu}
+        >
+          <MenuItem onClick={() => this.changeSortType(NAME_SORT_TYPE)}>
+            <FormattedMessage {...messages.sortByNames} />
+          </MenuItem>
+          <MenuItem onClick={() => this.changeSortType(WATER_CONSUMPTION_SORT_TYPE)}>
+            <FormattedMessage {...messages.sortByWaterConsumptions} />
+          </MenuItem>
+        </Menu>
+      </Bar>
+      <List dense>
         {this.props.sortedUsers.map((user, userId) => {
           return (
             <ListItem key={userId}>
               <Avatar
-                onClick={this.handleWaterConsumptionClick}
                 alt={user.getIn(['value', 'name'], '')}
                 src={user.getIn(['value', 'avatarURL'], '')}
               />
               <ListItemText
-                onClick={this.handleNameClick}
                 primary={user.getIn(['value', 'name'], '')}
               />
               <Score>
