@@ -9,7 +9,7 @@ export class Navigation extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     location: PropTypes.shape({
-      pathname: propTypes.string.isRequired,
+      pathname: PropTypes.string.isRequired,
     }).isRequired,
   };
 

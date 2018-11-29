@@ -8,55 +8,49 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Avatar from '@material-ui/core/Avatar';
 
+import { NAME_SORT_TYPE, WATER_CONSUMPTION_SORT_TYPE } from '../../modules/users';
 import { Score, DrinkIcon } from './scoreboard.styles';
 
-const NAME_SORT_TYPE = 'name';
-const WATER_CONSUMPTION_SORT_TYPE = 'waterConsumption';
 
 export class Scoreboard extends PureComponent {
   static propTypes = {
-    users: PropTypes.instanceOf(Map).isRequired,
+    sortedUsers: PropTypes.instanceOf(Map).isRequired,
+    changeSortType: PropTypes.func.isRequired,
+    sortType: PropTypes.string.isRequired,
   };
 
-  state = {
-    sortBy: NAME_SORT_TYPE,
-  };
+  handleWaterConsumptionClick = () => this.props.changeSortType(WATER_CONSUMPTION_SORT_TYPE);
 
-  handleWaterConsumptionClick = () => this.setState({
-    sortBy: WATER_CONSUMPTION_SORT_TYPE,
-  });
+  handleNameClick = () => this.props.changeSortType(NAME_SORT_TYPE);
 
-  handleNameClick = () => this.setState({
-    sortBy: NAME_SORT_TYPE,
-  });
+  changeSortType = (sortType = NAME_SORT_TYPE) => this.props.changeSortType(sortType);
 
-  sortByStatus = (users) => users.sortBy(user => user.getIn(['value', this.state.sortBy], 0)).reverse();
+  render = () => (
+    <Fragment>
 
-    render = () => (
-      <Fragment>
-        <List dense subheader={<ListSubheader>Users</ListSubheader>}>
-          {this.sortByStatus(this.props.users).map((user, userId) => {
-            return (
-              <ListItem key={userId}>
-                <Avatar
-                  onClick={this.handleWaterConsumptionClick}
-                  alt={user.getIn(['value', 'name'], '')}
-                  src={user.getIn(['value', 'avatarURL'], '')}
-                />
-                <ListItemText
-                  onClick={this.handleNameClick}
-                  primary={user.getIn(['value', 'name'], '')}
-                />
-                <Score>
-                  <ListItemText primary={user.getIn(['value', 'waterConsumption'], 0)} />
-                  <ListItemIcon>
-                    <DrinkIcon />
-                  </ListItemIcon>
-                </Score>
-              </ListItem>
-            );
-          }).toArray()}
-        </List>
-      </Fragment>
-    );
+      <List key={this.props.sortType} dense subheader={<ListSubheader>Users</ListSubheader>}>
+        {this.props.sortedUsers.map((user, userId) => {
+          return (
+            <ListItem key={userId}>
+              <Avatar
+                onClick={this.handleWaterConsumptionClick}
+                alt={user.getIn(['value', 'name'], '')}
+                src={user.getIn(['value', 'avatarURL'], '')}
+              />
+              <ListItemText
+                onClick={this.handleNameClick}
+                primary={user.getIn(['value', 'name'], '')}
+              />
+              <Score>
+                <ListItemText primary={user.getIn(['value', 'waterConsumption'], 0)} />
+                <ListItemIcon>
+                  <DrinkIcon />
+                </ListItemIcon>
+              </Score>
+            </ListItem>
+          );
+        }).toArray()}
+      </List>
+    </Fragment>
+  );
 }

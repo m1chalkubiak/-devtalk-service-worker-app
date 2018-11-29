@@ -5,15 +5,16 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import { Scoreboard } from './scoreboard.component';
-import { selectUsers, UsersActions } from '../../modules/users/';
+import { selectSortedUsers, selectSortType, UsersActions } from '../../modules/users/';
 
 
 const mapStateToProps = createStructuredSelector({
-  users: selectUsers,
+  sortedUsers: selectSortedUsers,
+  sortType: selectSortType,
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({
-  setupUserData: UsersActions.setupUserData,
+  changeSortType: UsersActions.changeSortType,
 }, dispatch);
 
 export default hot(module)(compose(
