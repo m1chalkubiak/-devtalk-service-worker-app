@@ -27,21 +27,21 @@ export class Navigation extends PureComponent {
             label="Home"
             icon={<HomeIcon />}
             component={Link}
-            to={'/'}
-            value={'/'}
+            to="/"
+            value="/"
           />
           <NavigationItem
             label="Scoreboard"
             icon={<ScoreboardIcon />}
             component={Link}
-            to={'/scoreboard'}
-            value={'/scoreboard'}
+            to="/scoreboard"
+            value="/scoreboard"
           />
           <NavigationItem
             label="Settings"
             icon={<SettingsIcon />}
             component={Link}
-            to={'#'}
+            to="#"
           />
         </Container>
       </Fragment >
