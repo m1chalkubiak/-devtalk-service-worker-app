@@ -1,6 +1,7 @@
 import { Map, Record } from 'immutable';
+
 import { createActions, createReducer } from '../utils/entityRegistry';
-import { UserAuthTypes } from '../userAuth/userAuth.redux';
+import { NAME_SORT_TYPE } from './users.constants';
 
 
 export const {
@@ -11,16 +12,22 @@ export const {
   createUser: ['user'],
   listenForUsers: null,
   checkIfUserAccountExists: ['user'],
+  changeSortType: ['sortType'],
+  resetUsersList: null,
 }, { prefix: 'USERS_' });
 
 const UserAuthRecord = new Record({
   items: Map(),
+  sortType: NAME_SORT_TYPE,
 }, 'users');
 
 const INITIAL_STATE = new UserAuthRecord();
 
-const signOut = () => INITIAL_STATE;
+const resetUsersList = () => INITIAL_STATE;
+
+const changeSortType = (state, { sortType }) => state.set('sortType', sortType);
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [UserAuthTypes.SIGN_OUT]: signOut,
+  [UsersTypes.CHANGE_SORT_TYPE]: changeSortType,
+  [UsersTypes.RESET_USERS_LIST]: resetUsersList,
 }, { types: UsersTypes });

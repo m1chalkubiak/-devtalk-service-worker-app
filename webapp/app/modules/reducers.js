@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutable';
-
 import { reducer as formReducer } from 'redux-form/immutable';
+
 import { reducer as routerReducer } from './router/router.redux';
 import { reducer as localesReducer } from './locales/locales.redux';
 import { reducer as userAuthReducer } from './userAuth/userAuth.redux';
