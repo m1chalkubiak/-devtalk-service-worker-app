@@ -85,6 +85,15 @@ function* listenForFirebaseAuth() {
   }
 }
 
+function* resetWaterConsumption() {
+  try {
+    yield put(SyncActions.syncResetWaterConsumption());
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
 function* drinkWater({ value }) {
   try {
     yield put(SyncActions.syncWaterConsumption(value));
@@ -101,6 +110,7 @@ export default function* watchUserAuth() {
       takeLatest(UserAuthTypes.SIGN_OUT, signOutFromFirebase),
       takeLatest(UserAuthTypes.SETUP_USER, signOutFromFirebase),
       takeLatest(UserAuthTypes.DRINK_WATER, drinkWater),
+      takeLatest(UserAuthTypes.RESET_WATER_CONSUMPTION, resetWaterConsumption),
       takeLatest(StartupTypes.STARTUP, listenForFirebaseAuth),
     ]);
   } catch (error) {

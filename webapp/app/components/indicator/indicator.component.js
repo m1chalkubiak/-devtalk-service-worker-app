@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+import Fade from '@material-ui/core/Fade';
 
-import { Container, IndicatorBar, Track, ValueWrapper, Value } from './indicator.styles';
+import { Container, IndicatorBar, Track, ValueWrapper, Value, ValueSubTitle } from './indicator.styles';
+import messages from './indicator.messages';
 
 
 export class Indicator extends PureComponent {
@@ -23,25 +26,29 @@ export class Indicator extends PureComponent {
   }
 
   get percent() {
-    const { maxValue } = this.props;
-    return ((this.value / maxValue) * 100);
+    return ((this.value / this.props.maxValue) * 100);
   }
 
   get white() {
     return this.props.white ? 1 : 0;
   }
 
-  renderValues = () => `${this.value}/${this.props.maxValue}`;
+  renderValues = () => this.props.maxValue - this.value;
 
   render = () => (
-    <Container>
-      <ValueWrapper variant="fab" disabled>
-        <Value white={this.white} component="span" variant="subheading">
-          {this.renderValues()}
-        </Value>
-      </ValueWrapper>
-      <IndicatorBar white={this.white} size={132} variant="static" value={this.percent} />
-      <Track white={this.white} size={132} variant="static" value={100} />
-    </Container>
+    <Fade in={this.props.white}>
+      <Container>
+        <ValueWrapper variant="fab" disabled>
+          <Value white={this.white} component="span" variant="subheading">
+            {this.renderValues()}
+          </Value>
+          <ValueSubTitle white={this.white} component="span" variant="caption">
+            <FormattedMessage {...messages.waterConsumptionSubtitle} />
+          </ValueSubTitle>
+        </ValueWrapper>
+        <IndicatorBar white={this.white} size={132} variant="static" value={this.percent} />
+        <Track white={this.white} size={132} variant="static" value={100} />
+      </Container>
+    </Fade>
   );
 }

@@ -8,6 +8,7 @@ export const { Types: UserAuthTypes, Creators: UserAuthActions } = createActions
   setSyncStatus: ['isSyncing'],
   initializeWaterConsumption: ['value'],
   drinkWater: ['value'],
+  resetWaterConsumption: null,
   clearUserData: null,
   signOut: null,
   signInAnonymously: null,
@@ -34,11 +35,14 @@ const setSyncStatus = (state, { isSyncing }) => state.merge({ isSyncing });
 
 const drinkWater = (state, { value }) => state.update('waterConsumption', (currentValue) => currentValue + value);
 
+const resetWaterConsumption = (state) => state.update('waterConsumption', () => 0);
+
 export const reducer = createReducer(INITIAL_STATE, {
   [UserAuthTypes.SET_USER_DATA]: setUserData,
   [UserAuthTypes.SET_ONLINE_STATUS]: setOnlineStatus,
   [UserAuthTypes.SET_SYNC_STATUS]: setSyncStatus,
   [UserAuthTypes.INITIALIZE_WATER_CONSUMPTION]: drinkWater,
   [UserAuthTypes.DRINK_WATER]: drinkWater,
+  [UserAuthTypes.RESET_WATER_CONSUMPTION]: resetWaterConsumption,
   [UserAuthTypes.CLEAR_USER_DATA]: clearUserData,
 });
