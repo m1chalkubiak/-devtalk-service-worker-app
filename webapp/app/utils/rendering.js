@@ -1,6 +1,11 @@
-import { path, concat, ifElse, always, propEq } from 'ramda';
+import { path, concat, ifElse, always, equals, propEq, complement, isNil } from 'ramda';
 import { css } from 'styled-components';
 
+export const renderWhen = (pred, fn) => ifElse(pred, fn, always(null));
+
+export const renderWhenNotNil = (fn) => renderWhen(complement(isNil), fn);
+
+export const renderWhenTrue = (fn) => renderWhen(equals(true), fn);
 
 export const getUserAvatarURL = ({ uid, size = 285 }) => `https://api.adorable.io/avatars/${size}/${uid}.png`;
 

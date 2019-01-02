@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { ifElse, equals, always } from 'ramda';
 
+import { renderWhenTrue } from '../../utils/rendering';
 import { LinearProgress } from './progress.styles';
 
 
@@ -10,13 +10,11 @@ export class Progress extends PureComponent {
     active: PropTypes.bool.isRequired,
   };
 
-  render = () => ifElse(
-    equals(true),
+  render = () => renderWhenTrue(
     () => (
       <Fragment>
         <LinearProgress color="secondary" />
       </Fragment>
     ),
-    always(null)
   )(this.props.active);
 }
