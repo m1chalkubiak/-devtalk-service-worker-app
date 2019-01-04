@@ -77,11 +77,24 @@ function* syncWaterConsumption({ value }) {
   try {
     const loggedUser = yield select(selectLoggedUser);
     const uid = loggedUser.get('uid', '');
-
     const swRegistration = yield navigator.serviceWorker.ready;
 
     navigator.serviceWorker.controller.postMessage({ type: 'drinkWater', uid, value });
     swRegistration.sync.register('drinkWaterSync');
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
+function* syncResetWaterConsumption() {
+  try {
+    const loggedUser = yield select(selectLoggedUser);
+    const uid = loggedUser.get('uid', '');
+    const swRegistration = yield navigator.serviceWorker.ready;
+
+    navigator.serviceWorker.controller.postMessage({ type: 'resetWaterConsumption', uid, value: 0 });
+    swRegistration.sync.register('resetWaterConsumptionSync');
   } catch (error) {
     /* istanbul ignore next */
     reportError(error);
@@ -95,6 +108,7 @@ export default function* watchSync() {
       takeLatest(StartupTypes.STARTUP, listenForSyncStatus),
       takeLatest(StartupTypes.STARTUP, registerSync),
       takeLatest(SyncTypes.SYNC_WATER_CONSUMPTION, syncWaterConsumption),
+      takeLatest(SyncTypes.SYNC_RESET_WATER_CONSUMPTION, syncResetWaterConsumption),
     ]);
   } catch (error) {
     /* istanbul ignore next */

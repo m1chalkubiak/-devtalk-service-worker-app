@@ -17,8 +17,12 @@ export default defineMessages({
     id: 'dashboard.consumption',
     defaultMessage: 'Consumption: {value}',
   },
-  start: {
-    id: 'dashboard.score',
-    defaultMessage: 'Your score:',
+  addButton: {
+    id: 'dashboard.addButton',
+    defaultMessage: 'Drink 250ml of water',
+  },
+  resetButton: {
+    id: 'dashboard.resetButton',
+    defaultMessage: 'Reset daily consumption',
   },
 });

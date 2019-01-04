@@ -21,7 +21,6 @@ export class Navigation extends PureComponent {
         {React.Children.only(children)}
         <Container
           value={pathname}
-          showLabels
         >
           <NavigationItem
             label="Home"

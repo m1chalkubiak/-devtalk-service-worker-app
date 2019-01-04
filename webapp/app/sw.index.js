@@ -10,19 +10,29 @@ firebase.initializeApp({
   messagingSenderId: '382154385012',
 });
 
+const EVENT_TYPES = ['drinkWater', 'resetWaterConsumption'];
+const SYNC_EVENT_TYPES = ['drinkWaterSync', 'resetWaterConsumptionSync'];
 const drinkWaterHistory = [];
 
 const syncWaterHistoryUser = (data) => {
-  return firebase.database().ref('/users').child(data.uid).child('waterConsumption').transaction(
-    (currentConsumption) => (currentConsumption || 0) + data.value
-  ).then(() => {
-    drinkWaterHistory.splice(drinkWaterHistory.indexOf(data), 1);
-  });
+  const BINDED_FUNCTIONS_MAP = {
+    'resetWaterConsumption': () => data.value,
+    'drinkWater': (value) => (value || 0) + data.value,
+  };
+
+  if (EVENT_TYPES.indexOf(data.type) > -1) {
+    return firebase.database()
+      .ref('/users').child(data.uid).child('waterConsumption').transaction(
+        BINDED_FUNCTIONS_MAP[data.type]
+      ).then(() => {
+        drinkWaterHistory.splice(drinkWaterHistory.indexOf(data), 1);
+      });
+  }
+
+  return null;
 };
 
-const syncWaterHistory = () => {
-  return Promise.all(drinkWaterHistory.map(syncWaterHistoryUser));
-};
+const syncWaterHistory = () => Promise.all(drinkWaterHistory.map(syncWaterHistoryUser));
 
 const postSyncStatusMessage = (value) => {
   self.clients.matchAll().then((clients) => {
@@ -32,8 +42,14 @@ const postSyncStatusMessage = (value) => {
   });
 };
 
+// Activate worker immediately
+self.addEventListener('install', (event) => event.waitUntil(self.skipWaiting()));
+
+// Become available to all pages
+self.addEventListener('activate', (event) => event.waitUntil(self.clients.claim()));
+
 self.addEventListener('sync', (event) => {
-  if (event.tag === 'drinkWaterSync') {
+  if (SYNC_EVENT_TYPES.indexOf(event.tag) > -1) {
     postSyncStatusMessage(true);
 
     const syncWaterHistoryPromise = syncWaterHistory()
@@ -44,7 +60,7 @@ self.addEventListener('sync', (event) => {
 });
 
 self.addEventListener('message', event => {
-  if (event.data.type === 'drinkWater') {
+  if (EVENT_TYPES.indexOf(event.data.type) > -1) {
     drinkWaterHistory.push(event.data);
   }
 });

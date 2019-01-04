@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { ifElse, equals, always } from 'ramda';
 
+import { renderWhenTrue } from '../../utils/rendering';
 import { Container, LoaderProgress } from './loader.styles';
 
 
@@ -10,13 +10,11 @@ export class Loader extends PureComponent {
     loaded: PropTypes.bool.isRequired,
   };
 
-  render = () => ifElse(
-    equals(false),
+  render = () => renderWhenTrue(
     () => (
       <Container>
         <LoaderProgress mode="indeterminate" />
       </Container>
     ),
-    always(null)
-  )(this.props.loaded);
+  )(!this.props.loaded);
 }

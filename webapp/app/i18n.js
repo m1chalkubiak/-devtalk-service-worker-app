@@ -1,7 +1,7 @@
 import { addLocaleData } from 'react-intl';
 import enLocaleData from 'react-intl/locale-data/en';
 
-import { DEFAULT_LOCALE } from '../app/modules/locales/locales.redux';
+import { DEFAULT_LOCALE } from '../app/modules/locales/locales.constants';
 
 import enTranslationMessages from './translations/en.json';
 

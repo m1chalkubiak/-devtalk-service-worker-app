@@ -2,6 +2,7 @@ import { pick } from 'ramda';
 import { select, all, fork, put, takeLatest } from 'redux-saga/effects';
 import reportError from 'report-error';
 import { reset } from 'redux-form';
+import { replace } from 'react-router-redux';
 
 import { dbRef } from '../utils/refs';
 import { getUserAvatarURL } from '../../utils/rendering';
@@ -36,6 +37,7 @@ export function* createUser({ user: { uid, ...user } }) {
     const usersRef = dbRef.child('users');
     yield usersRef.child(uid).update(pick(['name', 'avatarURL'])(user));
     yield put(reset(SET_NAME_FORM));
+    yield put(replace('/'));
   } catch (error) {
     /* istanbul ignore next */
     reportError(error);

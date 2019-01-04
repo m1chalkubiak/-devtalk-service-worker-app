@@ -75,10 +75,19 @@ function* listenForFirebaseAuth() {
           yield put(replace('/login'));
         }
         if (pathname === '/login' && isConfigured) {
-          yield put(replace('/dashboard'));
+          yield put(replace('/'));
         }
       }
     }
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
+function* resetWaterConsumption() {
+  try {
+    yield put(SyncActions.syncResetWaterConsumption());
   } catch (error) {
     /* istanbul ignore next */
     reportError(error);
@@ -101,6 +110,7 @@ export default function* watchUserAuth() {
       takeLatest(UserAuthTypes.SIGN_OUT, signOutFromFirebase),
       takeLatest(UserAuthTypes.SETUP_USER, signOutFromFirebase),
       takeLatest(UserAuthTypes.DRINK_WATER, drinkWater),
+      takeLatest(UserAuthTypes.RESET_WATER_CONSUMPTION, resetWaterConsumption),
       takeLatest(StartupTypes.STARTUP, listenForFirebaseAuth),
     ]);
   } catch (error) {

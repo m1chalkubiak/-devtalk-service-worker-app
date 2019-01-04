@@ -46,7 +46,7 @@ export class Login extends PureComponent {
           name={NAME_FIELD}
           type="text"
         />
-        <LoginButton variant="raised" color="primary" type="submit">
+        <LoginButton variant="contained" color="primary" type="submit">
           <FormattedMessage {...messages.start} />
         </LoginButton>
       </LoginForm>
