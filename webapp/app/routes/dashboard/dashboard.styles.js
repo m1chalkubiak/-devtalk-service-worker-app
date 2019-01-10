@@ -29,13 +29,6 @@ export const UserStatus = styled(Typography)`
   }
 `;
 
-
-export const AddButton = styled(Button)`
-  && {
-    margin-top: ${getUnit(3)}px;
-  }
-`;
-
 export const ResetButton = styled(Button)`
   && {
     margin-top: ${getUnit(3)}px;
