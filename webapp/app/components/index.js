@@ -7,3 +7,4 @@ export { ConnectionNotifier } from './connectionNotifier';
 export { SyncNotifier } from './syncNotifier';
 export { Summary } from './summary';
 export { AddWaterForm } from './addWaterForm';
+export { WaterPicker } from './waterPicker';

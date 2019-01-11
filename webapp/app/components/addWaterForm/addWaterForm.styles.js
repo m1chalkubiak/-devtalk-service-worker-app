@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import { getUnit } from '../../utils/rendering';
+import { getColor, getUnit } from '../../utils/rendering';
 
 export const Form = styled.form`
   width: 100%; // Fix IE 11 issue.
@@ -11,9 +11,18 @@ export const Form = styled.form`
 
 export const AddButton = styled(Button)`
 && {
+  width: auto;
   margin-top: ${getUnit(3)}px;
   }
 `;
 
+export const ResetButton = styled(Button)`
+  && {
+    margin-top: ${getUnit(3)}px;
+    span {
+      color: ${getColor(['grey', 'A700'])};
+    }
+  }
+`;
 
 

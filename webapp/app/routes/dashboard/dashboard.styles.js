@@ -14,11 +14,14 @@ export const Container = styled.div`
  overflow: hidden;
 `;
 
-export const ContentContainer = styled.h1`
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
+export const ContentContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+  margin-top: 20px;
+ // display: flex;
+ // flex-direction: column;
+ // align-items: center;
+ // justify-content: center;
 `;
 
 export const UserStatus = styled(Typography)`

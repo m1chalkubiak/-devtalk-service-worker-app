@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { AvatarImage } from '../../theme';
 import { Progress, Summary, AddWaterForm } from '../../components';
 import messages from './dashboard.messages';
-import { Container, ContentContainer, ResetButton, UserStatus } from './dashboard.styles';
+import { Container, ContentContainer, UserStatus } from './dashboard.styles';
 
 
 export class Dashboard extends PureComponent {
@@ -49,16 +49,9 @@ export class Dashboard extends PureComponent {
             />
           </UserStatus>
 
-          <AddWaterForm initialValues={{ quantity: 250 }} onSubmit={drinkWater} />
+          <AddWaterForm initialValues={{ quantity: 250 }} onSubmit={drinkWater} onReset={resetWaterConsumption} />
 
-          <ResetButton
-            type="button"
-            size="small"
-            fullWidth
-            onClick={resetWaterConsumption}
-          >
-            <FormattedMessage {...messages.resetButton} />
-          </ResetButton>
+
         </ContentContainer>
       </Container>
     );
