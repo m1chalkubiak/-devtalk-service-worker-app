@@ -62,8 +62,9 @@
     ]
   },
   "dependencies": {
-    "@material-ui/core": "^1.4.0",
-    "@material-ui/icons": "^1.1.0",
+    "@date-io/moment": "^1.0.1",
+    "@material-ui/core": "^3.8.2",
+    "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
     "babel-polyfill": "6.26.0",
     "chalk": "^2.4.1",
@@ -82,7 +83,9 @@
     "lodash.defaultsdeep": "^4.6.0",
     "lodash.pullall": "^4.2.0",
     "lodash.uniq": "^4.5.0",
+    "material-ui-pickers": "^2.1.1",
     "minimist": "1.2.0",
+    "moment": "^2.23.0",
     "normalize.css": "^8.0.0",
     "prop-types": "^15.6.1",
     "query-string": "^5.0.0",
@@ -113,7 +116,8 @@
     "semver-compare": "^1.0.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^3.3.0",
-    "ua-parser-js": "^0.7.18"
+    "ua-parser-js": "^0.7.18",
+    "validate.js": "^0.12.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

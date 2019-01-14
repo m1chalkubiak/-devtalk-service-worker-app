@@ -59,7 +59,7 @@ export class Summary extends PureComponent {
     <Container square>
       <Bar position="static">
         <Toolbar disableGutters>
-          <Header color="inherit" variant="subheading" align="left">
+          <Header color="inherit" variant="subtitle1" align="left">
             <FormattedMessage
               {...messages.headline}
               values={{ name: this.name }}

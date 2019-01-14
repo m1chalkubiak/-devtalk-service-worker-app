@@ -37,10 +37,11 @@ export class Navigation extends PureComponent {
             value="/scoreboard"
           />
           <NavigationItem
-            label="Settings"
+            label="Profile"
             icon={<SettingsIcon />}
             component={Link}
-            to="#"
+            to="/profile"
+            value="/profile"
           />
         </Container>
       </Fragment >
