@@ -62,10 +62,9 @@ self.addEventListener('sync', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  // console.log(request);
-
   const response = caches
     .match(request)
+    .delete(cache)
     .then(response => response || fetch(request));
 
   event.respondWith(response);

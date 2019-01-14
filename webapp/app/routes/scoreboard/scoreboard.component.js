@@ -1,7 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Map } from 'immutable';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -12,7 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { FormattedMessage } from 'react-intl';
 
 import { NAME_SORT_TYPE, WATER_CONSUMPTION_SORT_TYPE } from '../../modules/users';
-import { Bar, Toolbar, Header, MoreIcon, Score, DrinkIcon } from './scoreboard.styles';
+import { Bar, Toolbar, Header, MoreIcon, Score, DrinkIcon, ListWrapper } from './scoreboard.styles';
 import messages from './scoreboard.messages';
 
 
@@ -66,7 +65,7 @@ export class Scoreboard extends PureComponent {
           </MenuItem>
         </Menu>
       </Bar>
-      <List dense>
+      <ListWrapper>
         {this.props.sortedUsers.map((user, userId) => {
           return (
             <ListItem key={userId}>
@@ -86,7 +85,7 @@ export class Scoreboard extends PureComponent {
             </ListItem>
           );
         }).toArray()}
-      </List>
+      </ListWrapper>
     </Fragment>
   );
 }

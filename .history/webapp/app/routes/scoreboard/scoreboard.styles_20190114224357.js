@@ -49,4 +49,4 @@ export const ListWrapper = styled(List)`
   && {
     margin-bottom: 50px;
   }
-`;
+`
