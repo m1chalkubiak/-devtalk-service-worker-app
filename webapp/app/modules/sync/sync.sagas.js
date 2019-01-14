@@ -101,6 +101,48 @@ function* syncResetWaterConsumption() {
   }
 }
 
+function* syncUserData({ user }) {
+  try {
+    const loggedUser = yield select(selectLoggedUser);
+    const uid = loggedUser.get('uid', '');
+    const swRegistration = yield navigator.serviceWorker.ready;
+
+    navigator.serviceWorker.controller.postMessage({ type: 'updateUserData', uid, user });
+    swRegistration.sync.register('updateUserDataSync');
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
+function* syncAddAlarm({ data }) {
+  try {
+    const loggedUser = yield select(selectLoggedUser);
+    const uid = loggedUser.get('uid', '');
+    const swRegistration = yield navigator.serviceWorker.ready;
+
+    navigator.serviceWorker.controller.postMessage({ type: 'addAlarm', uid, timeData: data });
+    swRegistration.sync.register('addAlarmSync');
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
+function* syncRemoveAlarm({ id }) {
+  try {
+    const loggedUser = yield select(selectLoggedUser);
+    const uid = loggedUser.get('uid', '');
+    const swRegistration = yield navigator.serviceWorker.ready;
+
+    navigator.serviceWorker.controller.postMessage({ type: 'removeAlarm', uid, id });
+    swRegistration.sync.register('removeAlarmSync');
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
 export default function* watchSync() {
   try {
     yield all([
@@ -109,6 +151,9 @@ export default function* watchSync() {
       takeLatest(StartupTypes.STARTUP, registerSync),
       takeLatest(SyncTypes.SYNC_WATER_CONSUMPTION, syncWaterConsumption),
       takeLatest(SyncTypes.SYNC_RESET_WATER_CONSUMPTION, syncResetWaterConsumption),
+      takeLatest(SyncTypes.SYNC_USER_DATA, syncUserData),
+      takeLatest(SyncTypes.SYNC_ADD_ALARM, syncAddAlarm),
+      takeLatest(SyncTypes.SYNC_REMOVE_ALARM, syncRemoveAlarm),
     ]);
   } catch (error) {
     /* istanbul ignore next */

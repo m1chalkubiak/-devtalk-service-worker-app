@@ -35,7 +35,7 @@ export class Indicator extends PureComponent {
     <Fade in={this.props.white}>
       <Container>
         <ValueWrapper disabled>
-          <Value white={Number(this.props.white)} component="span" variant="subheading">
+          <Value white={Number(this.props.white)} component="span" variant="subtitle1">
             {this.renderValues()}
           </Value>
           <ValueSubTitle white={Number(this.props.white)} component="span" variant="caption">

@@ -37,7 +37,7 @@ export class Login extends PureComponent {
     <Wrapper>
       <Helmet title="Login" />
       <LoginForm onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-        <Typography variant="headline" align="center" gutterBottom>
+        <Typography variant="h5" align="center" gutterBottom>
           <FormattedHTMLMessage {...messages.headline} />
         </Typography>
         <Field

@@ -36,3 +36,8 @@ export const selectLoggedUser = createSelector(
     uid,
   }),
 );
+
+export const selectLoggedUserAlarms = createSelector(
+  selectLoggedUser,
+  (user) => user.get('alarms', Map()),
+);

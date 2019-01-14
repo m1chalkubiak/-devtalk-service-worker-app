@@ -1,1 +1,1 @@
-export { AlarmList } from './alarmList.component';
+export { AlarmList } from './alarmList.container';

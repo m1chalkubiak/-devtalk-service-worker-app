@@ -10,7 +10,7 @@ import { Field, reduxForm, getFormValues } from 'redux-form/immutable';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Switch from '@material-ui/core/Switch';
 
-import { getFormFieldHelperText } from '../../../utils/rendering';
+import { getFormFieldHelperText, getDailyWaterRequirements } from '../../../utils/rendering';
 import { AlarmList } from '../../';
 import {
   PROFILE_FORM,
@@ -18,7 +18,7 @@ import {
   PROFILE_AGE_FIELD,
   PROFILE_WEIGHT_FIELD,
   PROFILE_NOTIFICATIONS_FIELD,
-} from '../../../modules/userAuth';
+} from './profileForm.constants';
 import messages from './profileForm.messages';
 import { Form, InputField, SwitchWrapper, Submit } from './profileForm.styles';
 
@@ -31,15 +31,8 @@ export class ProfileFormComponent extends PureComponent {
     values: PropTypes.instanceOf(Map).isRequired,
   };
 
-  handleSubmit = values => this.props.onSubmit(values);
-
-  renderCalculatedRequirements = ({ input, label, labelPlacement }) => (
-    <SwitchWrapper
-      control={<Switch checked={input.value} onChange={input.onChange} color="primary" />}
-      label={label}
-      labelPlacement={labelPlacement}
-    />
-  );
+  handleSubmit = values =>
+    this.props.onSubmit(values.set('dailyWaterRequirements', getDailyWaterRequirements(values.toJS())));
 
   renderSwitchField = ({ input, label }) => (
     <SwitchWrapper
@@ -113,11 +106,9 @@ export class ProfileFormComponent extends PureComponent {
   }
 }
 
-
 const mapStateToProps = createStructuredSelector({
   values: getFormValues(PROFILE_FORM),
 });
-
 
 export const ProfileForm = compose(
   injectIntl,

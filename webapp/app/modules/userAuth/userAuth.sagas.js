@@ -85,6 +85,15 @@ function* listenForFirebaseAuth() {
   }
 }
 
+function* updateUserData({ user }) {
+  try {
+    yield put(SyncActions.syncUserData(user.toJS()));
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
 function* resetWaterConsumption() {
   try {
     yield put(SyncActions.syncResetWaterConsumption());
@@ -103,13 +112,36 @@ function* drinkWater({ value }) {
   }
 }
 
+function* addAlarm({ time }) {
+  try {
+    yield put(SyncActions.syncAddAlarm({
+      id: time.format('HHmm'),
+      time: time.format('HH:mm'),
+    }));
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
+function* removeAlarm({ id }) {
+  try {
+    yield put(SyncActions.syncRemoveAlarm(id));
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
 export default function* watchUserAuth() {
   try {
     yield all([
       takeLatest(UserAuthTypes.SIGN_IN_ANONYMOUSLY, signInAnonymously),
       takeLatest(UserAuthTypes.SIGN_OUT, signOutFromFirebase),
-      takeLatest(UserAuthTypes.SETUP_USER, signOutFromFirebase),
+      takeLatest(UserAuthTypes.UPDATE_USER_DATA, updateUserData),
       takeLatest(UserAuthTypes.DRINK_WATER, drinkWater),
+      takeLatest(UserAuthTypes.ADD_ALARM, addAlarm),
+      takeLatest(UserAuthTypes.REMOVE_ALARM, removeAlarm),
       takeLatest(UserAuthTypes.RESET_WATER_CONSUMPTION, resetWaterConsumption),
       takeLatest(StartupTypes.STARTUP, listenForFirebaseAuth),
     ]);

@@ -2,12 +2,14 @@ import { createActions, createReducer } from 'reduxsauce';
 import { Record } from 'immutable';
 
 export const { Types: UserAuthTypes, Creators: UserAuthActions } = createActions({
-  setupUser: ['user'],
   setUserData: ['user'],
+  updateUserData: ['user'],
   setOnlineStatus: ['isOnline'],
   setSyncStatus: ['isSyncing'],
   initializeWaterConsumption: ['value'],
   drinkWater: ['value'],
+  addAlarm: ['time'],
+  removeAlarm: ['id'],
   resetWaterConsumption: null,
   clearUserData: null,
   signOut: null,

@@ -42,7 +42,7 @@ export class Scoreboard extends PureComponent {
     <Fragment>
       <Bar position="static">
         <Toolbar disableGutters>
-          <Header color="inherit" variant="subheading" align="left">
+          <Header color="inherit" variant="subtitle1" align="left">
             <FormattedMessage {...messages.usersListHeadline} />
           </Header>
           <IconButton

@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import { omit } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
@@ -25,12 +26,16 @@ export class Profile extends PureComponent {
     return !!this.state.anchorEl;
   }
 
+  get user() {
+    return omit(['uid'])(this.props.user.toJS());
+  }
+
   handleCloseMenu = () => this.setState({ anchorEl: null });
 
   handleOpenMenu = ({ currentTarget: anchorEl }) => this.setState({ anchorEl });
 
   render() {
-    const { user, updateUser } = this.props;
+    const { updateUser } = this.props;
     return (
       <Fragment>
         <Helmet title="Profile settings" />
@@ -58,7 +63,7 @@ export class Profile extends PureComponent {
         </Bar>
         <Container>
           <ProfileForm
-            initialValues={user}
+            initialValues={this.user}
             onSubmit={updateUser}
           />
         </Container>
