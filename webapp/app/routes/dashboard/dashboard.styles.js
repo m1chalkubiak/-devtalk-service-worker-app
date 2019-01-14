@@ -18,10 +18,6 @@ export const ContentContainer = styled.div`
   width: 100%;
   overflow: hidden;
   margin-top: 20px;
- // display: flex;
- // flex-direction: column;
- // align-items: center;
- // justify-content: center;
 `;
 
 export const UserStatus = styled(Typography)`

@@ -45,10 +45,10 @@ const itemList = [
 
 export class WaterPicker extends React.Component {
   static propTypes = {
-    onChange: PropTypes.func.isRequired,
+    input: PropTypes.object.isRequired,
   };
 
-  handleAfterChange = index => this.props.onChange(itemList[index].value);
+  handleAfterChange = index => this.props.input.onChange(itemList[index].value);
 
   render() {
     return (
@@ -56,7 +56,7 @@ export class WaterPicker extends React.Component {
         <Slider {...settings} afterChange={this.handleAfterChange}>
           {itemList.map((item, id) => (
             <div key={id}>
-              <ItemWrapper>
+              <ItemWrapper key={id}>
                 <Item
                   icon={item.icon}
                   label={`${item.value}ml`}

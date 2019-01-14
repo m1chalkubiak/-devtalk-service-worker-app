@@ -1,1 +1,1 @@
-export { AddWaterForm } from './addWaterForm.component';
+export { AddWaterForm } from './addWaterForm.container';

@@ -1,16 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Map } from 'immutable';
-import { connect } from 'react-redux';
-import { reduxForm, Field, getFormValues } from 'redux-form/immutable';
-import { createStructuredSelector } from 'reselect';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import { compose } from 'ramda';
+import { Field } from 'redux-form/immutable';
+import { FormattedMessage } from 'react-intl';
 
-import { ADD_WATER_FORM, QUANTITY_FIELD } from '../../modules/userAuth';
+import { QUANTITY_FIELD } from './addWaterForm.constants';
 import { Form, AddButton, ResetButton } from './addWaterForm.styles';
-import messages from './addWaterForm.messages';
 import { WaterPicker } from '../waterPicker';
+import messages from './addWaterForm.messages';
+
 
 export class AddWaterFormComponent extends PureComponent {
   static propTypes = {
@@ -22,8 +20,6 @@ export class AddWaterFormComponent extends PureComponent {
 
   handleSubmit = values => this.props.onSubmit(values.get('quantity', 0));
 
-  renderWaterPicker = ({ input }) => <WaterPicker {...input} />;
-
   render = () => {
     const { handleSubmit, values, onReset } = this.props;
 
@@ -31,7 +27,7 @@ export class AddWaterFormComponent extends PureComponent {
       <Form onSubmit={handleSubmit(this.handleSubmit)}>
         <Field
           name={QUANTITY_FIELD}
-          component={this.renderWaterPicker}
+          component={WaterPicker}
         />
         <div>
           <AddButton variant="contained" color="primary" type="submit">
@@ -54,13 +50,3 @@ export class AddWaterFormComponent extends PureComponent {
     );
   };
 }
-
-const mapStateToProps = createStructuredSelector( {
-  values: getFormValues(ADD_WATER_FORM),
-});
-
-export const AddWaterForm = compose(
-  injectIntl,
-  reduxForm({ form: ADD_WATER_FORM }),
-  connect(mapStateToProps),
-)(AddWaterFormComponent);

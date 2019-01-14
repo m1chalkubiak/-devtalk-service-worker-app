@@ -4,5 +4,3 @@ export {
 } from './userAuth.redux';
 
 export * from './userAuth.selectors';
-
-export * from './userAuth.constants';

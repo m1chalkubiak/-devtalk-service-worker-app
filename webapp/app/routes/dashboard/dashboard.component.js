@@ -36,7 +36,6 @@ export class Dashboard extends PureComponent {
           userData={this.userData}
           onResetWaterConsumption={resetWaterConsumption}
         />
-
         <AvatarImage
           src={this.props.currentUser.get('avatarURL', '')}
           alt={this.props.currentUser.get('name', '')}
@@ -48,10 +47,7 @@ export class Dashboard extends PureComponent {
               values={{ value: this.props.waterConsumption }}
             />
           </UserStatus>
-
           <AddWaterForm initialValues={{ quantity: 250 }} onSubmit={drinkWater} onReset={resetWaterConsumption} />
-
-
         </ContentContainer>
       </Container>
     );

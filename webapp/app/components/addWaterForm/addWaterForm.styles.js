@@ -10,10 +10,10 @@ export const Form = styled.form`
 `;
 
 export const AddButton = styled(Button)`
-&& {
-  width: auto;
-  margin-top: ${getUnit(3)}px;
-  }
+  && {
+    width: auto;
+    margin-top: ${getUnit(3)}px;
+    }
 `;
 
 export const ResetButton = styled(Button)`
@@ -24,5 +24,3 @@ export const ResetButton = styled(Button)`
     }
   }
 `;
-
-
