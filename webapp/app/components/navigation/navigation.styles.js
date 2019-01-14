@@ -7,7 +7,7 @@ import SettingsIconMaterial from '@material-ui/icons/Settings';
 
 
 export const Container = styled(BottomNavigation)`
-  position: absolute;
+  position: fixed;
   width: 100%;
   bottom: 0;
 `;
