@@ -18,12 +18,15 @@ export const Container = styled.div`
   .slick-slide {
     opacity: 0.5;
     filter: grayscale(70%);
+    transition: 0.5s;
+
   }
   
   .slick-center {
     transform: scale(1.3);
     opacity: 1;
     filter: grayscale(0);
+    transition: 0.5s;
   }
 `;
 
@@ -47,8 +50,8 @@ export const Item = styled(Tab)`
       
     svg {
       fill: ${getColor(['primary', 'main'])};
-      width: 1em;
-      height: 1em;
+      width: 2em;
+      height: 2em;
     }  
   }
 `;

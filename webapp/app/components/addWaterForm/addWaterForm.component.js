@@ -10,7 +10,7 @@ import { compose } from 'ramda';
 import { ADD_WATER_FORM, QUANTITY_FIELD } from '../../modules/userAuth';
 import { Form, AddButton, ResetButton } from './addWaterForm.styles';
 import messages from './addWaterForm.messages';
-import { WaterPicker } from "../waterPicker";
+import { WaterPicker } from '../waterPicker';
 
 export class AddWaterFormComponent extends PureComponent {
   static propTypes = {
@@ -41,7 +41,6 @@ export class AddWaterFormComponent extends PureComponent {
             />
           </AddButton>
         </div>
-
         <div>
           <ResetButton
             type="button"
