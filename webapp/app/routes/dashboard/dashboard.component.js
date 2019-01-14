@@ -4,9 +4,9 @@ import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 
 import { AvatarImage } from '../../theme';
-import { Progress, Summary } from '../../components';
+import { Progress, Summary, AddWaterForm } from '../../components';
 import messages from './dashboard.messages';
-import { Container, ContentContainer, AddButton, ResetButton, UserStatus } from './dashboard.styles';
+import { Container, ContentContainer, UserStatus } from './dashboard.styles';
 
 
 export class Dashboard extends PureComponent {
@@ -36,7 +36,6 @@ export class Dashboard extends PureComponent {
           userData={this.userData}
           onResetWaterConsumption={resetWaterConsumption}
         />
-
         <AvatarImage
           src={this.props.currentUser.get('avatarURL', '')}
           alt={this.props.currentUser.get('name', '')}
@@ -44,36 +43,11 @@ export class Dashboard extends PureComponent {
         <ContentContainer>
           <UserStatus white={this.white} component="div" variant="caption">
             <FormattedMessage
-              {...messages.onlineStatus}
-              values={{ value: this.props.isOnline ? 'True' : 'False' }}
-            />
-            <FormattedMessage
-              {...messages.syncStatus}
-              values={{ value: this.props.isSyncing ? 'True' : 'False' }}
-            />
-            <FormattedMessage
               {...messages.consumption}
               values={{ value: this.props.waterConsumption }}
             />
           </UserStatus>
-
-          <AddButton
-            variant="contained"
-            color="primary"
-            type="button"
-            fullWidth
-            onClick={() => drinkWater(250)}
-          >
-            <FormattedMessage {...messages.addButton} />
-          </AddButton>
-          <ResetButton
-            type="button"
-            size="small"
-            fullWidth
-            onClick={resetWaterConsumption}
-          >
-            <FormattedMessage {...messages.resetButton} />
-          </ResetButton>
+          <AddWaterForm initialValues={{ quantity: 250 }} onSubmit={drinkWater} onReset={resetWaterConsumption} />
         </ContentContainer>
       </Container>
     );

@@ -82,8 +82,11 @@ module.exports = (options) => {
           loader: 'css-loader',
         }],
       }, {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        test: /\.(eot|ttf|woff|woff2)$/,
         loader: 'file-loader',
+      }, {
+        test: /\.(svg)$/,
+        loader: 'raw-loader',
       }, {
         test: /\.(jpg|png|gif)$/,
         use: [

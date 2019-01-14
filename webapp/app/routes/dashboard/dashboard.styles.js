@@ -14,11 +14,10 @@ export const Container = styled.div`
  overflow: hidden;
 `;
 
-export const ContentContainer = styled.h1`
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
+export const ContentContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+  margin-top: 20px;
 `;
 
 export const UserStatus = styled(Typography)`
@@ -26,13 +25,6 @@ export const UserStatus = styled(Typography)`
     display: flex;
     flex-direction: column;
     width: 100%;
-  }
-`;
-
-
-export const AddButton = styled(Button)`
-  && {
-    margin-top: ${getUnit(3)}px;
   }
 `;
 

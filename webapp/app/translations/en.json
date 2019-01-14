@@ -1,5 +1,15 @@
 {
-  "home.maintainerList.title": "Maintainers",
+  "addWaterForm.addButton": "",
+  "addWaterForm.resetButton": "",
+  "dashboard.consumption": "",
+  "dashboard.headline": "",
   "home.welcome": "Welcome to Apptension React Boilerplate!",
-  "contact.title": "Contact page"
+  "indicator.waterConsumptionSubtitle": "",
+  "login.headline": "",
+  "login.start": "",
+  "scoreboard.sortByNames": "",
+  "scoreboard.sortByWaterConsumptions": "",
+  "scoreboard.usersListHeadline": "",
+  "summary.headline": "",
+  "summary.resetWaterConsumption": ""
 }

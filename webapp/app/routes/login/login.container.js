@@ -22,4 +22,3 @@ export default hot(module)(compose(
     form: SET_NAME_FORM,
   })
 )(Login));
-
