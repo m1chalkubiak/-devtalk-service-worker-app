@@ -59,18 +59,6 @@ self.addEventListener('sync', (event) => {
   }
 });
 
-self.addEventListener('fetch', (event) => {
-  const { request } = event;
-
-  // console.log(request);
-
-  const response = caches
-    .match(request)
-    .then(response => response || fetch(request));
-
-  event.respondWith(response);
-});
-
 self.addEventListener('message', event => {
   if (EVENT_TYPES.indexOf(event.data.type) > -1) {
     drinkWaterHistory.push(event.data);

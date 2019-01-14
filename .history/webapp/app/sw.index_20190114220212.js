@@ -69,7 +69,7 @@ self.addEventListener('fetch', (event) => {
     .then(response => response || fetch(request));
 
   event.respondWith(response);
-});
+})
 
 self.addEventListener('message', event => {
   if (EVENT_TYPES.indexOf(event.data.type) > -1) {
