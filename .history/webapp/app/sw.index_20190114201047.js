@@ -59,29 +59,6 @@ self.addEventListener('sync', (event) => {
   }
 });
 
-self.addEventListener('fetch', (event) => {
-  const { request } = event;
-
-  const response = caches
-    .match(request)
-    .then((response) => {
-      if (response) {
-        return response;
-      }
-
-      return fetch(request)
-        .then(resp => {
-          if (request.url.endsWith('.png')) {
-            return caches.open('v1').then(cache => {
-              cache.put(request, resp.clone());
-              return resp;
-            });
-          } else { return resp; };
-        });
-    });
-  event.respondWith(response);
-});
-
 self.addEventListener('message', event => {
   if (EVENT_TYPES.indexOf(event.data.type) > -1) {
     drinkWaterHistory.push(event.data);

@@ -62,23 +62,12 @@ self.addEventListener('sync', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
+  // console.log(request);
+
   const response = caches
     .match(request)
-    .then((response) => {
-      if (response) {
-        return response;
-      }
+    .then(response => response || fetch(request));
 
-      return fetch(request)
-        .then(resp => {
-          if (request.url.endsWith('.png')) {
-            return caches.open('v1').then(cache => {
-              cache.put(request, resp.clone());
-              return resp;
-            });
-          } else { return resp; };
-        });
-    });
   event.respondWith(response);
 });
 

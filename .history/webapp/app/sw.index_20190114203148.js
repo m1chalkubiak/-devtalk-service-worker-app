@@ -69,18 +69,11 @@ self.addEventListener('fetch', (event) => {
         return response;
       }
 
-      return fetch(request)
-        .then(resp => {
-          if (request.url.endsWith('.png')) {
-            return caches.open('v1').then(cache => {
-              cache.put(request, resp.clone());
-              return resp;
-            });
-          } else { return resp; };
-        });
-    });
+      return fetch(request);
+    })
+
   event.respondWith(response);
-});
+})
 
 self.addEventListener('message', event => {
   if (EVENT_TYPES.indexOf(event.data.type) > -1) {
