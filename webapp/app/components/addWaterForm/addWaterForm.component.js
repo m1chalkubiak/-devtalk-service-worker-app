@@ -4,11 +4,12 @@ import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import { reduxForm, Field, getFormValues } from 'redux-form/immutable';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { compose } from 'ramda';
 
 import { ADD_WATER_FORM, QUANTITY_FIELD } from '../../modules/userAuth';
 import { Form, AddButton, ResetButton } from './addWaterForm.styles';
+import messages from './addWaterForm.messages';
 import { WaterPicker } from "../waterPicker";
 
 export class AddWaterFormComponent extends PureComponent {
@@ -34,7 +35,10 @@ export class AddWaterFormComponent extends PureComponent {
         />
         <div>
           <AddButton variant="contained" color="primary" type="submit">
-            Drink {values.get('quantity', 0)}ml of water
+            <FormattedMessage
+              {...messages.addButton}
+              values={{ value: values.get('quantity', 0) }}
+            />
           </AddButton>
         </div>
 
@@ -44,7 +48,7 @@ export class AddWaterFormComponent extends PureComponent {
             size="small"
             onClick={onReset}
           >
-            Reset your daily consumption
+            <FormattedMessage {...messages.resetButton} />
           </ResetButton>
         </div>
       </Form>
