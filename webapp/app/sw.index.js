@@ -64,8 +64,21 @@ self.addEventListener('fetch', (event) => {
 
   const response = caches
     .match(request)
-    .delete(cache)
-    .then(response => response || fetch(request));
+    .then((response) => {
+      if (response) {
+        return response;
+      }
+
+      return fetch(request)
+        .then(resp => {
+          if (request.url.endsWith('.png')) {
+            return caches.open('v1').then(cache => {
+              cache.put(event.request, resp.clone());
+              return resp;
+            });
+          }
+        });
+    });
 
   event.respondWith(response);
 });
@@ -75,3 +88,7 @@ self.addEventListener('message', event => {
     drinkWaterHistory.push(event.data);
   }
 });
+
+// self.addEventListener('unregister', event => {
+//   caches.open('v1').delete
+// });
