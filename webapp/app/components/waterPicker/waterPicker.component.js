@@ -13,8 +13,9 @@ import Icon1000 from '../../images/svg/1000ml.svg';
 const settings = {
   infinite: false,
   speed: 300,
-  slidesToShow: 1,
   initialSlide: 1,
+  swipeToSlide: true,
+  touchThreshold: 15,
   centerMode: true,
   variableWidth: true,
   focusOnSelect: true,
