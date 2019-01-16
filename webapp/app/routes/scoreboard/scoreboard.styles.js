@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import MuiToolbar from '@material-ui/core/Toolbar';
 import MoreVert from '@material-ui/icons/MoreVert';
 import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
 
 import { getColor, getUnit } from '../../utils/rendering';
 
@@ -41,5 +42,11 @@ export const Score = styled(ListItemSecondaryAction)`
 export const DrinkIcon = styled(LocalDrinkIcon)`
   && {
     color: ${getColor(['secondary', 'dark'])};
+  }
+`;
+
+export const ListWrapper = styled(List)`
+  && {
+    margin-bottom: 50px;
   }
 `;
