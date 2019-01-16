@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import AppBar from '@material-ui/core/AppBar';
 import MuiToolbar from '@material-ui/core/Toolbar';
 import MoreVert from '@material-ui/icons/MoreVert';

@@ -11,7 +11,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Switch from '@material-ui/core/Switch';
 
 import { getFormFieldHelperText, getDailyWaterRequirements } from '../../../utils/rendering';
-import { AlarmList } from '../../';
+import { AlarmList } from './alarmList';
 import {
   PROFILE_FORM,
   PROFILE_NAME_FIELD,
@@ -34,13 +34,23 @@ export class ProfileFormComponent extends PureComponent {
   handleSubmit = values =>
     this.props.onSubmit(values.set('dailyWaterRequirements', getDailyWaterRequirements(values.toJS())));
 
-  renderSwitchField = ({ input, label }) => (
-    <SwitchWrapper
-      control={<Switch checked={input.value} onChange={input.onChange} color="primary" />}
-      label={label}
-      labelPlacement="start"
-    />
-  );
+  renderSwitchField = ({ input, label }) => {
+    const handleChange = (e, checked) => {
+      if (checked) {
+        Notification.requestPermission().then((permission) => input.onChange(permission === 'granted'));
+      } else {
+        input.onChange(checked);
+      }
+    };
+
+    return (
+      <SwitchWrapper
+        control={<Switch checked={input.value} onChange={handleChange} color="primary" />}
+        label={label}
+        labelPlacement="start"
+      />
+    );
+  };
 
   renderTextField = ({ meta, input, type = 'text', label, InputProps, disabled }) => (
     <InputField

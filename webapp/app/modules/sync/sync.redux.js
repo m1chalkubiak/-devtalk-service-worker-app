@@ -6,4 +6,5 @@ export const { Types: SyncTypes, Creators: SyncActions } = createActions({
   syncUserData: ['user'],
   syncAddAlarm: ['data'],
   syncRemoveAlarm: ['id'],
+  initializeAlarms: [],
 }, { prefix: 'SYNC_' });

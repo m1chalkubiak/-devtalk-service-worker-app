@@ -56,6 +56,7 @@ function* listenForFirebaseAuth() {
       } else {
         yield put(UserAuthActions.setUserData({ uid: user.uid }));
         yield put(UsersActions.listenForUsers());
+        yield put(SyncActions.initializeAlarms());
         yield put(UserAuthActions.setOnlineStatus(true));
 
         const data = yield firebase.database().ref(`/users/${user.uid}`).once('value');

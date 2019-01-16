@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 
-import { getColor } from '../../utils/rendering';
+import { getColor } from '../../../../utils/rendering';
 
 
 export const Container = styled.div`

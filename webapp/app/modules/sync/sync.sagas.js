@@ -143,6 +143,20 @@ function* syncRemoveAlarm({ id }) {
   }
 }
 
+function* initializeAlarms() {
+  try {
+    const loggedUser = yield select(selectLoggedUser);
+    const uid = loggedUser.get('uid', '');
+    const swRegistration = yield navigator.serviceWorker.ready;
+
+    navigator.serviceWorker.controller.postMessage({ type: 'initializeAlarms', uid });
+    swRegistration.sync.register('initializeAlarmsSync');
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
 export default function* watchSync() {
   try {
     yield all([
@@ -154,6 +168,7 @@ export default function* watchSync() {
       takeLatest(SyncTypes.SYNC_USER_DATA, syncUserData),
       takeLatest(SyncTypes.SYNC_ADD_ALARM, syncAddAlarm),
       takeLatest(SyncTypes.SYNC_REMOVE_ALARM, syncRemoveAlarm),
+      takeLatest(SyncTypes.INITIALIZE_ALARMS, initializeAlarms),
     ]);
   } catch (error) {
     /* istanbul ignore next */

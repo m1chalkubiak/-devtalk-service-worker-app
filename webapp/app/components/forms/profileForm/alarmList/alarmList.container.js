@@ -4,8 +4,8 @@ import { compose } from 'ramda';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 
-import { selectLoggedUserAlarms } from '../../modules/users';
-import { UserAuthActions } from '../../modules/userAuth';
+import { selectLoggedUserAlarms } from '../../../../modules/users';
+import { UserAuthActions } from '../../../../modules/userAuth';
 import { AlarmListComponent } from './alarmList.component';
 
 

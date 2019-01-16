@@ -6,7 +6,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu/Menu';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 
-import { SyncNotifier, ConnectionNotifier, Indicator } from '../';
+import { SyncNotifier } from './syncNotifier';
+import { ConnectionNotifier } from './connectionNotifier';
+import { Indicator } from './indicator';
 import { Container, Bar, Header, Toolbar, MoreIcon, DataContainer } from './summary.styles';
 import messages from './summary.messages';
 

@@ -3,7 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
 
-import { getUnit, white } from '../../utils/rendering';
+import { getUnit, white } from '../../../utils/rendering';
 
 
 export const Container = styled.div`
