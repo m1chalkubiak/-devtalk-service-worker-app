@@ -73,10 +73,10 @@ self.addEventListener('fetch', (event) => {
         .then(resp => {
           if (request.url.endsWith('.png')) {
             return caches.open('v1').then(cache => {
-              cache.put(event.request, resp.clone());
+              cache.put(request, resp.clone());
               return resp;
             });
-          }
+          } else { return resp; };
         });
     });
 
@@ -88,7 +88,3 @@ self.addEventListener('message', event => {
     drinkWaterHistory.push(event.data);
   }
 });
-
-// self.addEventListener('unregister', event => {
-//   caches.open('v1').delete
-// });
