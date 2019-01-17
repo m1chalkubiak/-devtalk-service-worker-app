@@ -31,7 +31,7 @@ function* setupUserData({ user: { name } }) {
   const avatarURL = getUserAvatarURL({ uid });
   const age = 25;
   const weight = 75;
-  const showNotifications = true;
+  const showNotifications = false;
   const dailyWaterRequirements = getDailyWaterRequirements({ age, weight });
   yield put(UsersActions.createUser({
     uid, name, age, weight, dailyWaterRequirements, showNotifications, avatarURL,
