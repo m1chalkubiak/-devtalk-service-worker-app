@@ -8,7 +8,7 @@ import { ADD_WATER_FORM } from './addWaterForm.constants';
 import { AddWaterFormComponent } from './addWaterForm.component';
 
 
-const mapStateToProps = createStructuredSelector( {
+const mapStateToProps = createStructuredSelector({
   values: getFormValues(ADD_WATER_FORM),
 });
 

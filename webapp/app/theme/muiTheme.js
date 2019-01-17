@@ -18,9 +18,17 @@ export const theme = createMuiTheme({
       contained: {
         boxShadow: 'none',
       },
-      label: {
+      containedPrimary: {
         color: '#fff',
       },
     },
+    MuiPickersModal: {
+      dialogAction: {
+        color: '#55bd86',
+      },
+    },
+  },
+  typography: {
+    useNextVariants: true,
   },
 });

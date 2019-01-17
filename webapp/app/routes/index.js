@@ -8,6 +8,7 @@ import { NotFound } from './notFound';
 import Login from './login';
 import Dashboard from './dashboard';
 import Scoreboard from './scoreboard';
+import Profile from './profile';
 import { Navigation } from '../components';
 
 export class RootContainer extends Component {
@@ -25,6 +26,7 @@ export class RootContainer extends Component {
               <Switch>
                 <AuthRoute exact path="/" component={Dashboard} />
                 <AuthRoute exact path="/scoreboard" component={Scoreboard} />
+                <AuthRoute exact path="/profile" component={Profile} />
               </Switch>
             </Navigation>
           </Switch>

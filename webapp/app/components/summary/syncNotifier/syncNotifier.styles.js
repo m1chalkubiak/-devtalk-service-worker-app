@@ -2,7 +2,7 @@ import styled, { css, keyframes } from 'styled-components';
 import SyncIcon from '@material-ui/icons/Sync';
 import SyncDisabledIcon from '@material-ui/icons/SyncDisabled';
 
-import { getColor, getUnit } from '../../utils/rendering';
+import { getColor, getUnit } from '../../../utils/rendering';
 
 
 const rotate = keyframes`

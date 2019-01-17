@@ -5,7 +5,7 @@ import { reset } from 'redux-form';
 import { replace } from 'react-router-redux';
 
 import { dbRef } from '../utils/refs';
-import { getUserAvatarURL } from '../../utils/rendering';
+import { getUserAvatarURL, getDailyWaterRequirements } from '../../utils/rendering';
 import { createSaga } from '../utils/entityRegistry';
 import { UsersTypes, UsersActions } from './users.redux';
 import { selectDomain as selectUsers, selectLoggedUser } from './users.selectors';
@@ -29,13 +29,20 @@ function* setupUserData({ user: { name } }) {
   const loggedUser = yield select(selectLoggedUser);
   const uid = loggedUser.get('uid', '');
   const avatarURL = getUserAvatarURL({ uid });
-  yield put(UsersActions.createUser({ uid, name, avatarURL }));
+  const age = 25;
+  const weight = 75;
+  const showNotifications = false;
+  const dailyWaterRequirements = getDailyWaterRequirements({ age, weight });
+  yield put(UsersActions.createUser({
+    uid, name, age, weight, dailyWaterRequirements, showNotifications, avatarURL,
+  }));
 }
 
 export function* createUser({ user: { uid, ...user } }) {
   try {
     const usersRef = dbRef.child('users');
-    yield usersRef.child(uid).update(pick(['name', 'avatarURL'])(user));
+    yield usersRef.child(uid)
+      .update(pick(['name', 'age', 'weight', 'dailyWaterRequirements', 'showNotifications', 'avatarURL'])(user));
     yield put(reset(SET_NAME_FORM));
     yield put(replace('/'));
   } catch (error) {

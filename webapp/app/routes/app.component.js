@@ -2,6 +2,8 @@ import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { IntlProvider } from 'react-intl';
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import MomentUtils from '@date-io/moment';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from 'styled-components';
@@ -41,14 +43,16 @@ export class App extends PureComponent {
           messages={translationMessages[DEFAULT_LOCALE]}
           location={this.props.location}
         >
-          <MuiThemeProvider theme={theme}>
-            <ThemeProvider theme={theme}>
-              <Fragment>
-                <Loader />
-                {React.Children.only(this.props.children)}
-              </Fragment>
-            </ThemeProvider>
-          </MuiThemeProvider>
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <MuiThemeProvider theme={theme}>
+              <ThemeProvider theme={theme}>
+                <Fragment>
+                  <Loader />
+                  {React.Children.only(this.props.children)}
+                </Fragment>
+              </ThemeProvider>
+            </MuiThemeProvider>
+          </MuiPickersUtilsProvider>
         </IntlProvider>
       </Fragment>
     );

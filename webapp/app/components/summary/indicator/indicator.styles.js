@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
 
-import { getUnit, white } from '../../utils/rendering';
+import { getUnit, white } from '../../../utils/rendering';
 
 
 export const Container = styled.div`
@@ -38,7 +38,7 @@ export const Track = styled(CircularProgress)`
   }
 `;
 
-export const ValueWrapper = styled(Button)`
+export const ValueWrapper = styled(Fab)`
   &&& {
     width: ${getUnit(15)}px;
     height: ${getUnit(15)}px;

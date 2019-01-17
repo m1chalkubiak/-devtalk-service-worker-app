@@ -6,7 +6,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu/Menu';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 
-import { SyncNotifier, ConnectionNotifier, Indicator } from '../';
+import { SyncNotifier } from './syncNotifier';
+import { ConnectionNotifier } from './connectionNotifier';
+import { Indicator } from './indicator';
 import { Container, Bar, Header, Toolbar, MoreIcon, DataContainer } from './summary.styles';
 import messages from './summary.messages';
 
@@ -59,7 +61,7 @@ export class Summary extends PureComponent {
     <Container square>
       <Bar position="static">
         <Toolbar disableGutters>
-          <Header color="inherit" variant="subheading" align="left">
+          <Header color="inherit" variant="subtitle1" align="left">
             <FormattedMessage
               {...messages.headline}
               values={{ name: this.name }}

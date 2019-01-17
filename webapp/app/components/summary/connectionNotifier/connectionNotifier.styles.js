@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import WifiIcon from '@material-ui/icons/WifiTethering';
 import WifiOffIcon from '@material-ui/icons/PortableWifiOff';
 
-import { getColor, getUnit } from '../../utils/rendering';
+import { getColor, getUnit } from '../../../utils/rendering';
 
 
 export const Container = styled.div`
