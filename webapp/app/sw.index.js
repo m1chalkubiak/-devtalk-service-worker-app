@@ -150,7 +150,7 @@ const updateLocalAlarmList = (event) => {
     alarmList.items.push(event.data.timeData);
   }
   if (event.data.type === 'removeAlarm') {
-    alarmList.items.splice(alarmList.findIndex((alarm) => alarm.id === event.data.id), 1);
+    alarmList.items.splice(alarmList.items.findIndex((alarm) => alarm.id === event.data.id), 1);
   }
 };
 
